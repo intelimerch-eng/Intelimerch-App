@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #f8f9fa;
+    color: #1a1a1a;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 w-full flex items-center justify-center gap-2;
+  }
+  .btn-outline {
+    @apply border border-primary text-primary font-semibold px-6 py-3 rounded-xl hover:bg-primary-light transition-all duration-200 flex items-center justify-center gap-2;
+  }
+  .input-field {
+    @apply w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all;
+  }
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 p-6;
+  }
+  .stat-card {
+    @apply bg-white rounded-2xl border border-gray-100 p-5;
+  }
+  .nav-item {
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-all text-sm font-medium cursor-pointer;
+  }
+  .nav-item-active {
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-xl text-primary bg-primary-light text-sm font-medium cursor-pointer;
+  }
+  .badge-active {
+    @apply bg-green-50 text-green-700 border border-green-200 text-xs font-medium px-2.5 py-1 rounded-full;
+  }
+  .badge-paused {
+    @apply bg-red-50 text-red-600 border border-red-200 text-xs font-medium px-2.5 py-1 rounded-full;
+  }
+  .badge-draft {
+    @apply bg-orange-50 text-orange-600 border border-orange-200 text-xs font-medium px-2.5 py-1 rounded-full;
+  }
+  .filter-btn {
+    @apply border border-gray-200 text-gray-600 text-sm font-medium px-4 py-1.5 rounded-full hover:border-primary hover:text-primary transition-all;
+  }
+  .filter-btn-active {
+    @apply border border-primary text-primary bg-primary-light text-sm font-medium px-4 py-1.5 rounded-full;
+  }
+}
+
+/* ── Responsive overrides ── */
+@layer utilities {
+  /* Make stat cards stack nicely on small screens */
+  @media (max-width: 640px) {
+    .stat-card {
+      @apply p-4;
+    }
+    .card {
+      @apply p-4;
+    }
+  }
+
+  /* Scrollable tables on medium screens */
+  .table-scroll {
+    @apply overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0;
+  }
+
+  /* Auth card full width on mobile */
+  @media (max-width: 480px) {
+    .auth-card-inner {
+      @apply p-5;
+    }
+  }
+}
