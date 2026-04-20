@@ -23,13 +23,17 @@ export default function Activated() {
           Your merch is now registered and tied to you. Welcome to the inside
         </p>
 
-        <div className="w-full bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+        <div className="w-full bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-4">
           <div className="flex justify-center mb-4">
             <Smartphone size={40} className="text-gray-700" />
           </div>
-          <h3 className="font-bold text-gray-900 text-lg mb-1">Scan again to unlock your perks</h3>
+          <h3 className="font-bold text-gray-900 text-lg mb-1">Tap again to unlock your perks</h3>
           <p className="text-sm text-gray-500">Hold your phone near the NFC tag</p>
         </div>
+
+        <button onClick={() => navigate('/fan/perks')} className="btn-primary rounded-full py-4 text-base font-bold w-full">
+          View My Perks →
+        </button>
       </div>
     </MobileShell>
   )

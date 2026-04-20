@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Outlet, NavLink, useNavigate } from 'react-router-dom'
+import { Outlet, NavLink, useNavigate, useSearchParams } from 'react-router-dom'
 import {
   LayoutDashboard, Megaphone, Package, Gift, Tag, BarChart2,
   User, LogOut, Bell, Menu, X, ChevronLeft
@@ -18,6 +18,8 @@ const navItems = [
 
 export default function DashboardLayout() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const adminAs = searchParams.get('adminAs')
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -101,6 +103,14 @@ export default function DashboardLayout() {
             </div>
           </div>
 
+          {adminAs && (
+            <div className="bg-amber-50 border-b border-amber-200 px-6 py-2.5 flex items-center justify-between">
+              <p className="text-sm text-amber-800 font-medium">
+                🔒 <span className="font-bold">Admin View</span> — Viewing dashboard as <span className="text-primary font-bold">{decodeURIComponent(adminAs)}</span>
+              </p>
+              <button onClick={() => navigate('/admin/creators')} className="text-xs text-amber-700 hover:text-amber-900 font-semibold border border-amber-300 rounded-lg px-3 py-1 hover:bg-amber-100 transition-all">Exit Admin View</button>
+            </div>
+          )}
           <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
             <Outlet />
           </main>

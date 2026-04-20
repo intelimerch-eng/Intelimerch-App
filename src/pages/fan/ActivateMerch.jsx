@@ -9,7 +9,7 @@ export default function ActivateMerch() {
         <span className="font-black text-xl">INTELI<span className="text-primary">MERCH</span></span>
       </div>
 
-      <p className="text-xs font-bold text-primary tracking-widest mb-2">FIRST SCAN DETECTED</p>
+      <p className="text-xs font-bold text-primary tracking-widest mb-2">FIRST TAP DETECTED</p>
       <h1 className="text-5xl font-black leading-tight text-gray-900 mb-1">ACTIVATE</h1>
       <h1 className="text-5xl font-black leading-tight mb-4">
         YOUR <span className="text-primary">MERCH</span>

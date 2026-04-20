@@ -28,11 +28,20 @@ import PerksLanding from './pages/fan/PerksLanding'
 import VideoPerk from './pages/fan/VideoPerk'
 import DiscountPerk from './pages/fan/DiscountPerk'
 import AudioPerk from './pages/fan/AudioPerk'
+import ImagePerk from './pages/fan/ImagePerk'
+import DocumentPerk from './pages/fan/DocumentPerk'
+import LinkPerk from './pages/fan/LinkPerk'
+
+// New Dashboard Pages
+import CampaignAnalytics from './pages/dashboard/CampaignAnalytics'
 
 // Admin Pages
 import AdminLayout from './components/AdminLayout'
 import AdminOverview from './pages/admin/AdminOverview'
 import CreatorsManagement from './pages/admin/CreatorsManagement'
+import AdminCampaigns from './pages/admin/AdminCampaigns'
+import AdminAnalytics from './pages/admin/AdminAnalytics'
+import AdminTags from './pages/admin/AdminTags'
 
 export default function App() {
   return (
@@ -51,6 +60,7 @@ export default function App() {
           <Route index element={<Overview />} />
           <Route path="campaigns" element={<Campaigns />} />
           <Route path="campaigns/new" element={<NewCampaign />} />
+          <Route path="campaigns/:campaignId/analytics" element={<CampaignAnalytics />} />
           <Route path="products" element={<Products />} />
           <Route path="products/add" element={<AddProduct />} />
           <Route path="perks" element={<PerksLibrary />} />
@@ -69,11 +79,17 @@ export default function App() {
         <Route path="/fan/perks/video" element={<VideoPerk />} />
         <Route path="/fan/perks/discount" element={<DiscountPerk />} />
         <Route path="/fan/perks/audio" element={<AudioPerk />} />
+        <Route path="/fan/perks/image" element={<ImagePerk />} />
+        <Route path="/fan/perks/document" element={<DocumentPerk />} />
+        <Route path="/fan/perks/link" element={<LinkPerk />} />
 
         {/* Admin */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminOverview />} />
           <Route path="creators" element={<CreatorsManagement />} />
+          <Route path="campaigns" element={<AdminCampaigns />} />
+          <Route path="analytics" element={<AdminAnalytics />} />
+          <Route path="tags" element={<AdminTags />} />
         </Route>
       </Routes>
     </BrowserRouter>

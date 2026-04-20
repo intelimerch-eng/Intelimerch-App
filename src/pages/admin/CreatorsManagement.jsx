@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Plus, Search, Trash2 } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { Plus, Search, Trash2, LayoutDashboard } from 'lucide-react'
 
 const creators = [
   { name: 'Luna Torres', handle: '@lunatms', tags: 2, scans: 14220, campaign: 1, status: 'Active', initials: 'LT', color: 'from-orange-300 to-pink-400' },
@@ -9,6 +10,7 @@ const creators = [
 ]
 
 export default function CreatorsManagement() {
+  const navigate = useNavigate()
   const [filter, setFilter] = useState('All')
   const [search, setSearch] = useState('')
   const filters = ['All', 'Active', 'Inactive']
@@ -70,7 +72,7 @@ export default function CreatorsManagement() {
             </div>
 
             <div className="flex gap-3">
-              <button className="btn-primary w-auto px-5 text-sm py-2">View Dashboard</button>
+              <button onClick={() => navigate(`/dashboard?adminAs=${encodeURIComponent(creator.handle)}`)} className="btn-primary w-auto px-5 text-sm py-2 gap-2"><LayoutDashboard size={14} /> View Dashboard</button>
               <button className="border border-red-200 text-red-500 font-semibold px-5 py-2 rounded-xl hover:bg-red-50 text-sm flex items-center gap-2 transition-all">
                 <Trash2 size={14} /> Delete
               </button>

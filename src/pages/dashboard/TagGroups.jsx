@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Pencil, Plus, Trash2, TrendingUp, Wifi, BarChart2, TrendingDown } from 'lucide-react'
+import EmptyState from '../../components/EmptyState'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts'
 
-const tags = [
+const initTags = [
   { id: 'NFC-H001', product: 'Premium Hoodie — Black', scans: 412, lastScan: '2025-06-18' },
   { id: 'NFC-H002', product: 'Premium Hoodie — Navy', scans: 501, lastScan: '2025-06-18' },
   { id: 'NFC-H003', product: 'Premium Hoodie — White', scans: 210, lastScan: '2025-06-18' },
@@ -17,10 +18,11 @@ const scanData = [
   { month: 'Oct', scans: 680 }, { month: 'Nov', scans: 720 }, { month: 'Dec', scans: 800 },
 ]
 
-const barData = tags.map(t => ({ name: t.id, scans: t.scans }))
-const rankMax = Math.max(...tags.map(t => t.scans))
+const barData = initTags.map(t => ({ name: t.id, scans: t.scans }))
+const rankMax = Math.max(...initTags.map(t => t.scans))
 
 export default function TagGroups() {
+  const [tags, setTags] = useState(initTags)
   const [activeTab, setActiveTab] = useState('All Tags (5)')
   const [period, setPeriod] = useState('12 months')
   const periods = ['12 months', '3 months', '30 days', '7 days', '24 hours']
@@ -102,6 +104,9 @@ export default function TagGroups() {
       </div>
 
       {activeTab === 'All Tags (5)' ? (
+        tags.length === 0 ? (
+          <EmptyState icon="📡" title="No tags in this group" description="Add NFC tags to this group to start tracking taps and linking fan experiences." actionLabel="Add Tag" />
+        ) : (
         <div className="card p-0 overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-gray-50/50">
@@ -121,7 +126,7 @@ export default function TagGroups() {
                   <td className="px-5 py-4">
                     <div className="flex gap-2">
                       <button className="p-1.5 border border-gray-200 rounded-lg hover:bg-gray-50"><Pencil size={13} className="text-primary" /></button>
-                      <button className="p-1.5 border border-gray-200 rounded-lg hover:bg-gray-50"><Trash2 size={13} className="text-red-400" /></button>
+                      <button onClick={() => setTags(t => t.filter((_, j) => j !== i))} className="p-1.5 border border-gray-200 rounded-lg hover:bg-gray-50"><Trash2 size={13} className="text-red-400" /></button>
                     </div>
                   </td>
                 </tr>
@@ -129,6 +134,7 @@ export default function TagGroups() {
             </tbody>
           </table>
         </div>
+        )
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="col-span-1 lg:col-span-2 card">

@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Plus, Search, MoreHorizontal, Pencil, Trash2 } from 'lucide-react'
+import EmptyState from '../../components/EmptyState'
+
+const CAT_KEY = 'intelimerch_product_categories'
+const defaultCats = ['T-Shirt', 'Cap', 'Hoodie', 'Shorts', 'Bag']
+const getCats = () => { try { return JSON.parse(localStorage.getItem(CAT_KEY)) || defaultCats } catch { return defaultCats } }
 
 const productData = Array(12).fill(null).map((_, i) => ({
   name: 'Classic Logo Tee', type: 'T-Shirt', color: 'Black', size: 'M',
@@ -13,7 +18,8 @@ export default function Products() {
   const [filter, setFilter] = useState('All')
   const [search, setSearch] = useState('')
   const [openMenu, setOpenMenu] = useState(null)
-  const filters = ['All', 'T-Shirt', 'Cap', 'Hoodie']
+  const [categories] = useState(getCats)
+  const filters = ['All', ...categories]
 
   return (
     <div>
@@ -28,7 +34,7 @@ export default function Products() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {filters.map(f => (
             <button key={f} onClick={() => setFilter(f)} className={filter === f ? 'filter-btn-active' : 'filter-btn'}>{f}</button>
           ))}
@@ -39,6 +45,9 @@ export default function Products() {
         </div>
       </div>
 
+      {productData.filter(p => filter === 'All' || p.type === filter).length === 0 ? (
+        <EmptyState icon="📦" title="No products yet" description="Add your first NFC-linked product to start tracking taps and managing campaigns." action={() => navigate('/dashboard/products/add')} actionLabel="Add Product" />
+      ) : (
       <div className="card p-0 overflow-x-auto">
         <table className="w-full text-sm min-w-[900px]">
           <thead className="bg-gray-50/50">
@@ -78,6 +87,7 @@ export default function Products() {
           </tbody>
         </table>
       </div>
+      )}
     </div>
   )
 }

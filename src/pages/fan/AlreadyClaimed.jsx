@@ -1,7 +1,21 @@
+import { useSearchParams } from 'react-router-dom'
 import MobileShell from '../../components/MobileShell'
 import { Lock } from 'lucide-react'
 
 export default function AlreadyClaimed() {
+  const [params] = useSearchParams()
+  const ig = params.get('ig') || '#'
+  const yt = params.get('yt') || '#'
+  const sp = params.get('sp') || '#'
+  const tt = params.get('tt') || ''
+  const tw = params.get('tw') || ''
+
+  const SocialLink = ({ href, icon, label, className }) => (
+    href && href !== '#'
+      ? <a href={href} target="_blank" rel="noreferrer" className={className}>{icon}{label}</a>
+      : null
+  )
+
   return (
     <MobileShell bg="bg-red-50">
       <div className="flex-1 flex flex-col items-center justify-center text-center py-12">
@@ -19,22 +33,37 @@ export default function AlreadyClaimed() {
           This piece is registered to another fan. Each NFC tag is unique and tied to one person.
         </p>
 
-        <button className="btn-primary rounded-full py-4 text-base font-bold mb-10 w-full">
+        <a href="https://intelimerch.app" className="btn-primary rounded-full py-4 text-base font-bold mb-10 w-full block text-center">
           Get Your Own Merch
-        </button>
+        </a>
 
         <p className="font-semibold text-gray-800 mb-4">But while you're here follow Jenny</p>
-        <div className="grid grid-cols-2 gap-3 w-full mb-3">
-          <button className="border border-gray-200 bg-white rounded-xl py-3 flex items-center justify-center gap-2 text-sm font-medium hover:bg-gray-50">
+        <div className="flex flex-wrap gap-3 w-full justify-center">
+          <a href={ig} target="_blank" rel="noreferrer"
+            className="border border-gray-200 bg-white rounded-xl py-3 px-4 flex items-center justify-center gap-2 text-sm font-medium hover:bg-gray-50 flex-1 min-w-[120px]">
             <InstagramIcon /> Instagram
-          </button>
-          <button className="border border-gray-200 bg-white rounded-xl py-3 flex items-center justify-center gap-2 text-sm font-medium hover:bg-gray-50">
+          </a>
+          <a href={yt} target="_blank" rel="noreferrer"
+            className="border border-gray-200 bg-white rounded-xl py-3 px-4 flex items-center justify-center gap-2 text-sm font-medium hover:bg-gray-50 flex-1 min-w-[120px]">
             <YouTubeIcon /> YouTube
-          </button>
+          </a>
+          <a href={sp} target="_blank" rel="noreferrer"
+            className="border border-gray-200 bg-white rounded-xl py-3 px-4 flex items-center justify-center gap-2 text-sm font-medium hover:bg-gray-50 flex-1 min-w-[120px]">
+            <SpotifyIcon /> Spotify
+          </a>
+          {tt && (
+            <a href={tt} target="_blank" rel="noreferrer"
+              className="border border-gray-200 bg-white rounded-xl py-3 px-4 flex items-center justify-center gap-2 text-sm font-medium hover:bg-gray-50 flex-1 min-w-[120px]">
+              🎵 TikTok
+            </a>
+          )}
+          {tw && (
+            <a href={tw} target="_blank" rel="noreferrer"
+              className="border border-gray-200 bg-white rounded-xl py-3 px-4 flex items-center justify-center gap-2 text-sm font-medium hover:bg-gray-50 flex-1 min-w-[120px]">
+              𝕏 Twitter
+            </a>
+          )}
         </div>
-        <button className="border border-gray-200 bg-white rounded-xl py-3 flex items-center justify-center gap-2 text-sm font-medium hover:bg-gray-50 w-1/2">
-          <SpotifyIcon /> Spotify
-        </button>
       </div>
     </MobileShell>
   )
