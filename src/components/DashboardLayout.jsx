@@ -122,8 +122,10 @@ export default function DashboardLayout() {
 
 function Logo() {
   return (
-    <div className="font-black text-lg leading-none tracking-tight">
-      <span>INTELI</span><span className="text-primary">MERCH</span>
-    </div>
+    <img 
+      src="/logo.png" 
+      alt="Intelimerch" 
+      className="h-14 w-auto object-contain"
+    />
   )
 }
